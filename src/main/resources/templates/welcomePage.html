@@ -4,7 +4,7 @@
     <title>Welcome Page</title>
 </head>
 <body>
-<h1>Welcome "${welcomeMessage}"!!</h1>
+<h1 th:text="${welcomeMessage}"></h1>
 <form id="dataForm">
     <label for="sqlarea">SQL:</label><br>
     <textarea id="sqlarea" name="sqlarea" rows="4" cols="50" style="width: 100%;"></textarea><br>
