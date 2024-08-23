@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome Page</title>
+</head>
+<body>
+<h1>Welcome "${welcomeMessage}"!!</h1>
+<form id="dataForm">
+    <label for="sqlarea">SQL:</label><br>
+    <textarea id="sqlarea" name="sqlarea" rows="4" cols="50" style="width: 100%;"></textarea><br>
+    <button type="button" onclick="submitData()">Execute</button>
+</form>
+<div id="resultDiv"></div>
+
+<script>
+    function submitData() {
+        const sqlQuery = document.getElementById('sqlarea').value;
+        fetch('/welcome', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ query: sqlQuery })
+        })
+        .then(response => {
+            if (response.ok) {
+                startStream();
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function startStream() {
+        const eventSource = new EventSource('/stream');
+        eventSource.onmessage = function(event) {
+            const newElement = document.createElement("div");
+            newElement.innerHTML = event.data;
+            document.getElementById('resultDiv').appendChild(newElement);
+        };
+    }
+</script>
+</body>
+</html>
