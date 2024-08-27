@@ -2,6 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Welcome Page</title>
+    <style>
+        .scrollable-div{
+        height: 400px;
+        overflow-y: auto;
+        border: 2px solid black;
+        padding: 10px;
+        }
+    </style>
 </head>
 <body>
 <h1 th:text="${welcomeMessage}"></h1>
@@ -10,7 +18,9 @@
     <textarea id="sqlarea" name="sqlarea" rows="4" cols="50" style="width: 100%;"></textarea><br>
     <button type="button" onclick="submitData()">Execute</button>
 </form>
-<div id="resultDiv"></div>
+<br><br>
+<label for="resultDiv">SQL Results:</label><br>
+<div id="resultDiv" class="scrollable-div"></div>
 
 <script>
     function submitData() {
