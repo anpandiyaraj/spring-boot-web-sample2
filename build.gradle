@@ -7,15 +7,15 @@ plugins {
 
 repositories {
     mavenLocal()
-    mavenCentral()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
 }
 
 dependencies {
-    // Lombok (latest stable)
     compileOnly 'org.projectlombok:lombok:1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
 
-    // Spring Boot 4.1.0 starters
     implementation 'org.springframework.boot:spring-boot-starter-actuator:4.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-web:4.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:4.1.0'
@@ -23,9 +23,13 @@ dependencies {
     runtimeOnly 'org.springframework.boot:spring-boot-devtools:4.1.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:4.1.0'
 
-    // JSP support (Tomcat Jasper)
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:10.1.26'
+    // JSP support
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:11.0.22'
+
+    // Jackson for ObjectMapper
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
 }
+
 
 group = 'springboot-jsp-login-app'
 version = '0.0.1-SNAPSHOT'
